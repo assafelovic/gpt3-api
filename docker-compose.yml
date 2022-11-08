@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  gpt3-api:
+    container_name: gpt3-api
+    restart: always
+    env_file: .env
+    build: .
+    ports:
+      - '5005:5005'

@@ -1,0 +1,5 @@
+openai~=0.23.0
+flask~=2.0.1
+flask_cors
+python-dotenv==0.19.2
+gunicorn==20.1.0
