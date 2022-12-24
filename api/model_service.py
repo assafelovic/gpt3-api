@@ -34,6 +34,26 @@ class ModelService:
         }
 
     """
+            core openai wrapper for completion API
+        """
+
+    def image(self, prompt, kwargs={}):
+        n = kwargs.setdefault('n', 1)
+        size = kwargs.setdefault('size', '512x512')
+
+        r = openai.Image.create(
+            prompt=prompt,
+            n=n,
+            size=size
+        )
+
+        return {
+            "url": r["data"][0]["url"],
+            "n": n,
+            "size": size
+        }
+
+    """
         API Wrapper for prompt completion
     """
     def predict(self, prompt, kwargs={}):

@@ -18,6 +18,7 @@ A basic Flask API interface for OpenAI GPT3, including training and examples.
 |    --- | ---  | --- | 
 | `/` | **GET**    | Get current GPT3 model params
 | `/api/v1/predict`    | **POST**    | Predict GPT3 prompt completion
+| `/api/v1/image`    | **POST**    | Generate Dalle-2 prompt image
 
 <br />
 

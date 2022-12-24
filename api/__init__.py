@@ -38,3 +38,16 @@ def predict():
         return {"success": False, "result": "Error reading query"}, 400
     result = model_service.predict(prompt, args)
     return {"success": True, "result": result}, 200
+
+
+@app.route('/api/v1/image', methods=['POST'])
+def predict():
+    json = request.json
+    prompt = json.get("prompt")
+    args = {'n': json.setdefault("n", 1),
+            'size': json.setdefault("size", '512x512')}
+
+    if not prompt:
+        return {"success": False, "result": "Error reading query"}, 400
+    result = model_service.image(prompt, args)
+    return {"success": True, "result": result}, 200
