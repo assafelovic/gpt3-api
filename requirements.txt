@@ -1,4 +1,4 @@
-openai~=0.25.0
+openai~=0.27.0
 flask~=2.0.1
 flask_cors
 python-dotenv==0.19.2

@@ -34,9 +34,29 @@ class ModelService:
         }
 
     """
-            core openai wrapper for completion API
-        """
+        API Wrapper for ChatGPT
+    """
+    def chat(self, kwargs={}):
+        r = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=kwargs.get("messages")
+        )
+        completion_response = r["choices"][0]["message"]["content"].rstrip()
+        return completion_response
 
+    """
+       API Wrapper for OpenAI Whisper
+    """
+    def transcribe(self, kwargs={}):
+        audio_path = kwargs.get("audio_path")
+        file = open(audio_path, "rb")
+        transcription = openai.Audio.transcribe("whisper-1", file)
+        return transcription
+
+    """
+        API Wrapper for Dalle 2
+        Please note, images returned as uri will be removed within 1 hour.
+    """
     def image(self, prompt, kwargs={}):
         n = kwargs.setdefault('n', 1)
         size = kwargs.setdefault('size', '512x512')

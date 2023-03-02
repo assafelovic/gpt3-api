@@ -39,9 +39,31 @@ def predict():
     result = model_service.predict(prompt, args)
     return {"success": True, "result": result}, 200
 
+@app.route('/api/v1/chat', methods=['POST'])
+def chat():
+    json = request.json
+    messages = json.get("messages")
+    args = {'messages': messages}
+
+    if not messages:
+        return {"success": False, "result": "Error reading query"}, 400
+    result = model_service.chat(args)
+    return {"success": True, "result": result}, 200
+
+@app.route('/api/v1/transcribe', methods=['POST'])
+def chat():
+    json = request.json
+    audio_path = json.get("audio_path")
+    args = {'audio_path': audio_path}
+
+    if not audio_path:
+        return {"success": False, "result": "Error reading query"}, 400
+    result = model_service.transcribe(args)
+    return {"success": True, "result": result}, 200
+
 
 @app.route('/api/v1/image', methods=['POST'])
-def predict():
+def image():
     json = request.json
     prompt = json.get("prompt")
     args = {'n': json.setdefault("n", 1),
