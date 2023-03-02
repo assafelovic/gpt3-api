@@ -40,7 +40,7 @@ class ModelService:
         # Assume the following format: [{'role':'assistant'/'user', 'content': '...'},...]
         messages = kwargs.get("messages")
 
-        # (Optional) The chat_instructions is a system message that helps set the behavior of the assistant.
+        # (Optional) The chat_behavior is a system message that helps set the behavior of the assistant.
         chat_behavior = kwargs.get("chat_behavior")
         if chat_behavior:
             messages.insert({"role": "system", "content": chat_behavior})
