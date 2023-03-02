@@ -31,6 +31,7 @@ def predict():
     json = request.json
     prompt = json.get("prompt")
     args = {'temperature': json.setdefault("temperature", TEMPERATURE),
+            'moderation': json.setdefault("moderation", False),
             'max_tokens': json.setdefault("max_tokens", MAX_TOKENS),
             "model": json.setdefault("model", GPT_MODEL)}
 
@@ -52,7 +53,7 @@ def chat():
     return {"success": True, "result": result}, 200
 
 @app.route('/api/v1/transcribe', methods=['POST'])
-def chat():
+def transcribe():
     json = request.json
     audio_path = json.get("audio_path")
     args = {'audio_path': audio_path}

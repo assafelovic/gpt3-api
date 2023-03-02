@@ -10,6 +10,7 @@ A basic Flask API interface for OpenAI GPT3, ChatGPT, Whisper and Dalle2 includi
 - `Gunicorn` support
 - `Docker` support
 - Includes both prediction and training GPT3 services
+- Includes support for OpenAI moderation for validating responses
 
 
 ## API
@@ -27,7 +28,7 @@ A basic Flask API interface for OpenAI GPT3, ChatGPT, Whisper and Dalle2 includi
 > **Before you run** - Set your OpenAI API Key in .env file
 
 ```bash
-$ echo 'API_KEY={Your key here}' .env
+$ echo 'OPENAI_API_KEY={Your key here}' .env
 ```
 
 <br />
@@ -54,6 +55,7 @@ Client sends post request with the params `prompts` (String) and optional params
 POST /api/v1/predict
 {
   prompt: "What is the meaning of life?",
+  moderation: true,
   max_tokens: 128, 
   temperature: 0.4
 }
@@ -64,10 +66,37 @@ and the server responds with the predicted result:
 ```
 {
     "result": {
+        "result": "The meaning of life is to find fulfillment and purpose through living a life of value and making a positive contribution to the world.",
+        "temperature": 0.4,
         "max_tokens": 128,
-        "model": "text-davinci-002",
-        "result": "There is no one answer to this question. To some people, life might mean spending time with family, others might believe that the meaning of life is to help others.",
-        "temperature": 0.4
+        "model": "text-davinci-003",
+        "moderation": {
+            "id": "modr-6paOy8KtNPYQdPzDamKYvhQ1GQUGD",
+            "model": "text-moderation-004",
+            "results": [
+                {
+                    "categories": {
+                        "hate": false,
+                        "hate/threatening": false,
+                        "self-harm": false,
+                        "sexual": false,
+                        "sexual/minors": false,
+                        "violence": false,
+                        "violence/graphic": false
+                    },
+                    "category_scores": {
+                        "hate": 3.4930130254906544e-07,
+                        "hate/threatening": 8.722193106658338e-11,
+                        "self-harm": 2.9834368309167303e-09,
+                        "sexual": 4.3741639643712915e-08,
+                        "sexual/minors": 5.4334679117085116e-11,
+                        "violence": 5.354117149636295e-08,
+                        "violence/graphic": 1.3893468597814262e-09
+                    },
+                    "flagged": false
+                }
+            ]
+        },
     },
     "success": true
 }

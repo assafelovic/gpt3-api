@@ -1,12 +1,23 @@
 # -*- encoding: utf-8 -*-
-from api.config import OPENAI_API_KEY, TEMPERATURE, MAX_TOKENS, GPT_MODEL
 import openai
+
+from api.config import OPENAI_API_KEY, TEMPERATURE, MAX_TOKENS, GPT_MODEL
 
 
 class ModelService:
 
     def __init__(self):
         openai.api_key = OPENAI_API_KEY
+
+    '''
+        The moderation endpoint is a tool you can use to check whether content complies with OpenAI's usage policies.
+    '''
+    def moderation(self, input):
+        r = openai.Moderation.create(
+            input=input
+        )
+        return r
+
 
     """
         core openai wrapper for completion API
@@ -86,4 +97,8 @@ class ModelService:
     """
     def predict(self, prompt, kwargs={}):
         result = self.completion(prompt, kwargs)
+        if kwargs.get("moderation"):
+            moderation_results = self.moderation(result.get("result"))
+            result["moderation"] = moderation_results
         return result
+

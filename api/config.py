@@ -13,7 +13,7 @@ HOST = '127.0.0.1'
     For security purposes, set OpenAI API Key in root folder .env file
 '''
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-GPT_MODEL = 'text-davinci-002'
+GPT_MODEL = 'text-davinci-003'
 TEMPERATURE = 0.7
 MAX_TOKENS = 80
 
