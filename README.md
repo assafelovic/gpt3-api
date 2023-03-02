@@ -19,7 +19,7 @@ A basic Flask API interface for OpenAI GPT3, ChatGPT, Whisper and Dalle2 includi
 | `/` | **GET**    | Get current GPT3 model params
 | `/api/v1/predict`    | **POST**    | Predict GPT3 prompt completion
 | `/api/v1/image`    | **POST**    | Generate Dalle-2 prompt image
-| `/api/v1/chat`    | **POST**    | ChatGPT wrapper
+| `/api/v1/chat`    | **POST**    | ChatGPT wrapper including context support
 | `/api/v1/transcribe`    | **POST**    | OpenAI Whisper Transcription
 
 <br />
