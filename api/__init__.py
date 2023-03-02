@@ -43,7 +43,8 @@ def predict():
 def chat():
     json = request.json
     messages = json.get("messages")
-    args = {'messages': messages}
+    chat_behavior = json.get("chat_behavior")
+    args = {'messages': messages, 'chat_behavior': chat_behavior}
 
     if not messages:
         return {"success": False, "result": "Error reading query"}, 400

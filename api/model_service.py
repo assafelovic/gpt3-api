@@ -37,9 +37,17 @@ class ModelService:
         API Wrapper for ChatGPT
     """
     def chat(self, kwargs={}):
+        # Assume the following format: [{'role':'assistant'/'user', 'content': '...'},...]
+        messages = kwargs.get("messages")
+
+        # (Optional) The chat_instructions is a system message that helps set the behavior of the assistant.
+        chat_behavior = kwargs.get("chat_behavior")
+        if chat_behavior:
+            messages.insert({"role": "system", "content": chat_behavior})
+
         r = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            messages=kwargs.get("messages")
+            messages=messages
         )
         completion_response = r["choices"][0]["message"]["content"].rstrip()
         return completion_response
