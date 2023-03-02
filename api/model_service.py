@@ -10,7 +10,7 @@ class ModelService:
         openai.api_key = OPENAI_API_KEY
 
     '''
-        The moderation endpoint is a tool you can use to check whether content complies with OpenAI's usage policies.
+        The moderation endpoint is a tool you can use to check whether content is harmful and complies with OpenAI's usage policies.
     '''
     def moderation(self, input):
         r = openai.Moderation.create(
@@ -54,7 +54,7 @@ class ModelService:
         # (Optional) The chat_behavior is a system message that helps set the behavior of the assistant.
         chat_behavior = kwargs.get("chat_behavior")
         if chat_behavior:
-            messages.insert({"role": "system", "content": chat_behavior})
+            messages.insert(0, {"role": "system", "content": chat_behavior})
 
         r = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
