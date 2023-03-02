@@ -1,6 +1,6 @@
-# GPT3 Flask API Wrapper
+# OpenAI Flask API Wrapper
 
-A basic Flask API interface for OpenAI GPT3, including training and examples.
+A basic Flask API interface for OpenAI GPT3, ChatGPT, Whisper and Dalle2 including training and examples.
 
 <br />
 
